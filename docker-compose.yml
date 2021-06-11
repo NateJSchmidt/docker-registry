@@ -1,4 +1,4 @@
-verion: 3.9
+version: "3.3"
 services:
     docker-registry:
         image: registry:2
@@ -6,7 +6,7 @@ services:
             - "5000:5000"
         environment:
             REGISTRY_HTTP_ADDR: "0.0.0.0:5000"
-            REGISTRY_HTTP_TLS_CERTIFICATE: /cerst/docker-registry-cert.pem
+            REGISTRY_HTTP_TLS_CERTIFICATE: /certs/docker-registry-cert.pem
             REGISTRY_HTTP_TLS_KEY: /certs/docker-registry-key.pem
             REGISTRY_AUTH: htpasswd
             REGISTRY_AUTH_HTPASSWD_REALM: Registry Realm
