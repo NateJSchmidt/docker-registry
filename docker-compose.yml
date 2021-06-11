@@ -8,6 +8,9 @@ services:
             REGISTRY_HTTP_ADDR: "0.0.0.0:5000"
             REGISTRY_HTTP_TLS_CERTIFICATE: "./docker-registry-cert.pem"
             REGISTRY_HTTP_TLS_KEY: "./docker-registry-key.pem"
+            REGISTRY_AUTH: "htpasswd"
+            REGISTRY_AUTH_HTPASSWD_REALM: "Registry Realm"
+            REGISTRY_AUTH_HTPASSWD_PATH: "./users"
         volumes:
             - "./data:/var/lib/registry"
         restart: "on-failure"
