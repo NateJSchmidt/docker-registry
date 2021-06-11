@@ -26,7 +26,12 @@ def main(username, password):
 
     # create the certs
     my_ip = subprocess.run("hostname -I | cut -d' ' -f1", check=True, capture_output=True, shell=True).stdout.decode().strip()
-    subprocess.run(f'openssl req -x509 -newkey rsa:4096 -nodes -keyout docker-registry-key.pem -out docker-registry-cert.pem -days 365 -subj "/C=/ST=/L=/O=/CN={my_ip}"', check=True, shell=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+    subprocess.run(f'openssl req -x509 -newkey rsa:4096 -nodes -keyout docker-registry-key.pem -out ' \
+        f'docker-registry-cert.pem -days 365 -subj "/C=/ST=/L=/O=/CN={my_ip}" -addext "subjectAltName = DNS:192.168.0.10',
+        check=True,
+        shell=True,
+        stdout=subprocess.DEVNULL,
+        stderr=subprocess.DEVNULL)
     # generate the Diffie-Hellman parameter
     subprocess.run(f'openssl dhparam -out dhparam.pem 2048', check=True, shell=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
 
